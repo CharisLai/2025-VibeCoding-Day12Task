@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.bg-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.bg-image {
+  display: block;
+  /* 保持原始大小，不做寬高縮放設定 */
+}
+
+.dog-calculator {
+  position: absolute;
+  /* 以圖片幾何中心為基準，偏右上角區域 */
+  top: 23.4%;
+  left: 80.7%;
+  transform: translate(-50%, -50%);
+  min-width: 275px;
+  max-width: 325px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  padding: 30px 18px 23px;
+  box-sizing: border-box;
+  backdrop-filter: blur(6px);
+}
+
+.calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.calc-field label {
+  font-size: 16px;
+}
+
+.calc-field input[type="date"] {
+  padding: 6px 8px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.calc-field input[type="date"]:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.25);
+}
+
+#calcBtn {
+  width: 100%;
+  margin: 4px 0px 4px 0px;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffb74d, #ff9800);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.08s ease;
+}
+
+#calcBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+#calcBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  opacity: 0.9;
+}
+
+.result {
+  margin-top: 10px;
+  background-color: #ebe5e1;
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-weight: blod;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.result p {
+  margin: 2px 0;
+  font-weight: 700;
+}
