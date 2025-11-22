@@ -35,8 +35,8 @@ function formatDogAge(dogYears) {
     const years = Math.floor(totalMonths / 12);
     const months = totalMonths % 12;
 
-    const yearText = years > 0 ? ` ${years}. ` : "";
-    const monthText = months > 0 ? `${months} 歲` : "";
+    const yearText = years > 0 ? `${years} 歲` : "";
+    const monthText = months > 0 ? `${months} 個月` : "";
 
     if (yearText && monthText) return `${yearText} ${monthText}`;
     if (yearText) return yearText;
@@ -49,20 +49,45 @@ document.addEventListener("DOMContentLoaded", function () {
     const dogAgeText = document.getElementById("dogAgeText");
     const humanAgeText = document.getElementById("humanAgeText");
 
+    // ============================
+    // 1. 讀取 localStorage 的值
+    // ============================
+    const savedBirth = localStorage.getItem("dogBirthDate");
+
+    if (savedBirth) {
+        birthInput.value = savedBirth;
+
+        // 載入後自動計算
+        const result = calcDogAge(savedBirth);
+        if (!result.invalid) {
+            const dogAgeStr = formatDogAge(result.dogYears);
+            const humanYearsRounded = Math.round(result.humanYears * 10) / 10;
+
+            dogAgeText.textContent = `妙麗現在大約 ${dogAgeStr} 狗年齡，`;
+            humanAgeText.textContent = `換算人類年齡約是 ${humanYearsRounded} 歲。`;
+        }
+    }
+
+    // =========================================
+    // 2. 按下計算按鈕 → 計算＋寫入 localStorage
+    // =========================================
     calcBtn.addEventListener("click", function () {
         const birthValue = birthInput.value;
 
+        // **存入 localStorage**
+        localStorage.setItem("dogBirthDate", birthValue);
+
         const result = calcDogAge(birthValue);
         if (result.invalid) {
-            dogAgeText.textContent = "狗目前的年齡：—";
-            humanAgeText.textContent = "換算人類年齡：約 — 歲";
+            dogAgeText.textContent = "妙麗現在大約 —";
+            humanAgeText.textContent = "換算人類年齡約是 — 歲。";
             return;
         }
 
         const dogAgeStr = formatDogAge(result.dogYears);
         const humanYearsRounded = Math.round(result.humanYears * 10) / 10;
 
-        dogAgeText.textContent = `妙麗現在大約${dogAgeStr}狗年齡，`;
+        dogAgeText.textContent = `妙麗現在大約 ${dogAgeStr} 狗年齡，`;
         humanAgeText.textContent = `換算人類年齡約是 ${humanYearsRounded} 歲。`;
     });
 });
